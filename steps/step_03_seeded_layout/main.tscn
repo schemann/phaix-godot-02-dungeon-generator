@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://steps/step_03_seeded_layout/level.gd" id="1_level"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+ground_bottom_color = Color(0.38, 0.42, 0.47, 1)
+ground_horizon_color = Color(0.62, 0.66, 0.7, 1)
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.82, 0.86, 1)
+ambient_light_energy = 0.65
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Level" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("1_level")
+camera = NodePath("../OverviewCamera")
+
+[node name="OverviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6757246, 0.7371541, 0, -0.7371541, 0.6757246, 10, 24, 32)
+cull_mask = 1048573

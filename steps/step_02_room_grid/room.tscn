@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Material" path="res://materials/floor.tres" id="2_floor"]
+[ext_resource type="Material" path="res://materials/wall.tres" id="3_wall"]
+[ext_resource type="Material" path="res://materials/doorway.tres" id="4_doorway"]
+[ext_resource type="Material" path="res://materials/ceiling.tres" id="5_ceiling"]
+[ext_resource type="Material" path="res://materials/fixture.tres" id="6_fixture"]
+
+[node name="Room" type="Node3D"]
+
+[node name="Shell" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(10, 0.2, 10)
+material = ExtResource("2_floor")
+
+[node name="WallNorth" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5)
+size = Vector3(10.2, 3, 0.2)
+material = ExtResource("3_wall")
+
+[node name="Doorway" type="CSGBox3D" parent="Shell/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+operation = 2
+size = Vector3(1.6, 2.4, 0.4)
+material = ExtResource("4_doorway")
+
+[node name="WallEast" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, 0)
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("3_wall")
+
+[node name="Doorway" type="CSGBox3D" parent="Shell/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+operation = 2
+size = Vector3(0.4, 2.4, 1.6)
+material = ExtResource("4_doorway")
+
+[node name="WallSouth" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+size = Vector3(10.2, 3, 0.2)
+material = ExtResource("3_wall")
+
+[node name="Doorway" type="CSGBox3D" parent="Shell/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+operation = 2
+size = Vector3(1.6, 2.4, 0.4)
+material = ExtResource("4_doorway")
+
+[node name="WallWest" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, 0)
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("3_wall")
+
+[node name="Doorway" type="CSGBox3D" parent="Shell/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+operation = 2
+size = Vector3(0.4, 2.4, 1.6)
+material = ExtResource("4_doorway")
+
+[node name="Ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
+layers = 2
+use_collision = true
+size = Vector3(10, 0.2, 10)
+material = ExtResource("5_ceiling")
+
+[node name="Fixture" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96, 0)
+layers = 2
+size = Vector3(0.6, 0.08, 0.6)
+material = ExtResource("6_fixture")
+
+[node name="RoomLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 2.4
+omni_range = 12.0
