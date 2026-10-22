@@ -52,7 +52,7 @@ func _initialize() -> void:
 		_report("%s: wall is 0.2 m thick, the ceiling blocks a ray, the fixture does not (raycasts)" % step, await test_room_physics(step))
 		_report("%s: cutaway, overview cameras skip layer 2 and player cameras see it" % step, await test_cameras(step))
 		_report("%s: ambient fill, sun and sky" % step, await test_lighting(step))
-	for step in ["step_01_one_room", "step_02_room_grid", "step_03_seeded_layout"]:
+	for step: String in ["step_01_one_room", "step_02_room_grid", "step_03_seeded_layout"]:
 		_report("%s: every doorway is cut" % step, await test_all_doorways_cut(step))
 	for step in STEPS_WITH_DOORS:
 		_report("%s: doors are open on both sides, walls block (raycasts)" % step, await test_doors(step))
@@ -167,7 +167,7 @@ func test_materials() -> Array[String]:
 	_expect(failures, image.get_pixel(255, 32) == metre_line, "the tile does not wrap: left and right border differ")
 
 	var effective := {}
-	for material_name in ["floor", "wall", "ceiling", "doorway"]:
+	for material_name: String in ["floor", "wall", "ceiling", "doorway"]:
 		var material := load(MATERIAL_DIR + material_name + ".tres") as StandardMaterial3D
 		_expect(failures, material != null, "%s.tres is missing" % material_name)
 		if material == null:
@@ -612,7 +612,7 @@ func _report(test_name: String, failures: Array[String]) -> void:
 		return
 	_failed += 1
 	print("FAIL  ", test_name)
-	for message in failures.slice(0, 8):
+	for message: String in failures.slice(0, 8):
 		print("        ", message)
 	if failures.size() > 8:
 		print("        ... and %d more" % (failures.size() - 8))
